@@ -14,7 +14,7 @@ function beta = lasso(X,y,lambda)
 
 % set options for optimization
 miniter = 10;
-maxiter = 5000;
+maxiter = 4000;
 tol = 1e-5;
 
 % set fixed step size
@@ -32,7 +32,7 @@ for iter = 1:maxiter
     grad = (-(y - X*beta)'*(X))';
     Grad(iter, :) = grad;
     % compute new estimate of beta by appling soft thresholding operator
-    beta_new = softthresh(beta-t*grad,t*lambda);
+    beta_new = softthresh(beta-(t*grad),t*lambda);
      % compute new objective value
     obj_new = sum((y-X*beta_new).^2)/2 + lambda*sum(abs(beta_new));
     % check convergence

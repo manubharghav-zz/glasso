@@ -26,7 +26,7 @@ function [ W , T] = Glasso( X, lambda )
     Beta = zeros(p, p);
     Theta = zeros(p, p);
     % set ierations.
-    maxiter = 5000;
+    maxiter = 4000;
     tol = 1e-5;
 
     % Implement Glasso
@@ -65,22 +65,22 @@ function [ W , T] = Glasso( X, lambda )
             break;
         end
 
-        W = Wnew;
+        W = Wnew
 
-        for a = 1:p
-            I = ~ismember(1:p, a);
-            w22t = W(a,a);
-            w12t = W(a,:);
-            w12t = (w12t(I))';
-            beta = Beta(a,:);
-            beta = (beta(I))';
+        % for a = 1:p
+        %     I = ~ismember(1:p, a);
+        %     w22t = W(a,a);
+        %     w12t = W(a,:);
+        %     w12t = (w12t(I))';
+        %     beta = Beta(a,:);
+        %     beta = (beta(I))';
 
-            theta22 = 1/(w22t - (w12t')*beta);
-            theta12 = -beta*theta22;
-            Theta(a, :) = [theta12(1:a-1); theta22; theta12(a:end)]';
-            Theta(:, a) = [theta12(1:a-1); theta22; theta12(a:end)];
-        end
-        obj = log(det(Theta)) - trace(S*Theta) - lambda * (sum(sum(abs(Theta))))      
+        %     theta22 = 1/(w22t - (w12t')*beta);
+        %     theta12 = -beta*theta22;
+        %     Theta(a, :) = [theta12(1:a-1); theta22; theta12(a:end)]';
+        %     Theta(:, a) = [theta12(1:a-1); theta22; theta12(a:end)];
+        % end
+        % obj = log(det(Theta)) - trace(S*Theta) - lambda * (sum(sum(abs(Theta))))      
     end
 
     % Compute Theta 
